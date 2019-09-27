@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngFor="let data of causes"> 
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>{{ data['-id'] }}</ion-card-subtitle>
@@ -22,15 +22,15 @@
           <ion-col size="6">
             <ion-card-header>
               <ion-card-subtitle>Target</ion-card-subtitle>
-              <!-- <ion-card-title>{{ data['-targetAmount'] }}</ion-card-title> -->
-              <ion-card-title>{{ targetAmount }}</ion-card-title>
+              <ion-card-title>{{ data['-targetAmount'] }}</ion-card-title>
+              <!-- <ion-card-title>{{ targetAmount }}</ion-card-title> -->
             </ion-card-header>
           </ion-col>
           <ion-col size="6">
             <ion-card-header>
               <ion-card-subtitle>Collected</ion-card-subtitle>
-              <!-- <ion-card-title>{{ data['-collectedAmount'] }}</ion-card-title> -->
-              <ion-card-title>{{ collectedAmount }}</ion-card-title>
+              <ion-card-title>{{ data['-collectedAmount'] }}</ion-card-title>
+              <!-- <ion-card-title>{{ collectedAmount }}</ion-card-title> -->
             </ion-card-header>
           </ion-col>
         </ion-row>
@@ -38,13 +38,13 @@
     </ion-card-content>
     <ion-card-content>
       <circle-progress
+        percent='{{data["-collectedAmount"]*100 /data["-targetAmount"]}}'
         [renderOnClick]="false"
         [maxPercent]="100"
         [showTitle]="true"
         [responsive]="true"
         [outerStrokeLinecap]="'square'"
         [clockwise]="false"
-        [percent]="percent"
         [radius]="100"
         [outerStrokeWidth]="16"
         [innerStrokeWidth]="8"
@@ -56,6 +56,7 @@
         [startFromZero]="false"
       >
       </circle-progress>
+
       <ion-button expand="block" color="primary" (click)="DonateWithSms()"
         >Donate &nbsp;&nbsp;<i class="fa fa-heart"></i>
       </ion-button>

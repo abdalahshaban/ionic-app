@@ -13,6 +13,8 @@ export class HomePage implements OnInit {
   percent = 0;
   collectedAmount = 0;
   targetAmount = 0;
+  country=[]
+  causes=[]
 
   constructor(private sms: SMS, private socialSharing: SocialSharing) { }
 
@@ -28,16 +30,28 @@ export class HomePage implements OnInit {
 
   init(){
     // console.log(m.ikhair.country[0]['-causes'].cause[0]);
-    this.data = m.ikhair.country[0]['-causes'].cause[0];
-    this.collectedAmount = m.ikhair.country[0]['-causes'].cause[0]['-collectedAmount'];
-    this.targetAmount = m.ikhair.country[0]['-causes'].cause[0]['-targetAmount'];
-    this.percent = this.collectedAmount * 100 / this.targetAmount;
+    // m.ikhair.country[0] //*ngFor="let data of country; let i=index"
+    // m.ikhair.country[i]['-causes'].cause[0] // *ngFor="let cause of causes"
+    // this.data = m.ikhair.country[0]['-causes'].cause[0];
+    // this.collectedAmount = m.ikhair.country[0]['-causes'].cause[0]['-collectedAmount'];
+    // this.targetAmount = m.ikhair.country[0]['-causes'].cause[0]['-targetAmount'];
+    // this.percent = this.collectedAmount * 100 / this.targetAmount;
+    this.country=m.ikhair.country
+    for (let i = 0; i < this.country.length; i++) {
+      this.causes=this.country[i]['-causes']['cause']
+      
+    }
+
+    // console.log(this.country);
+    // console.log(this.causes);
+    // console.log(this.data);
+    
   }
 
   DonateWithSms() {
     // console.log('sms');
     // this.sms.send('5115', 'Thank You For Donate');
-    this.socialSharing.shareViaSMS('Thank You For Donate', '5111');
+    this.socialSharing.shareViaSMS('Thank You For Donate','5115');
   }
 
   shareViaFacebook() {
